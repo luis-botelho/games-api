@@ -9,7 +9,9 @@ import * as bcrypt from 'bcrypt';
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
   private _include = {
-    profiles: { select: { title: true, image: true } },
+    profiles: {
+      select: { title: true, image: true, id: true, userId: true, user: true },
+    },
   };
   async create(dto: CreateUserDto) {
     const data: Prisma.UsersCreateInput = {
@@ -26,6 +28,9 @@ export class UsersService {
 
   findAll() {
     return this.prisma.users.findMany();
+  }
+  findByEmail(email: string) {
+    return this.prisma.users.findUnique({ where: { email } });
   }
 
   async findOne(id: number) {

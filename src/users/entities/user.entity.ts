@@ -1,4 +1,3 @@
-
 import { Profile } from 'src/profiles/entities/profile.entity';
 
 export class User {

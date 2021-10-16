@@ -1,13 +1,11 @@
-import { Type } from 'class-transformer';
 import {
   IsArray,
   IsInt,
   IsNotEmpty,
   IsOptional,
   IsString,
-  ValidateNested,
 } from 'class-validator';
-import { ConnectGameDto } from 'src/games/dto/connect-game-dto';
+
 import { User } from 'src/users/entities/user.entity';
 
 export class CreateProfileDto {
