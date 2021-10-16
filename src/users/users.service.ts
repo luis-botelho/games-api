@@ -3,6 +3,7 @@ import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -14,12 +15,13 @@ export class UsersService {
     const data: Prisma.UsersCreateInput = {
       ...dto,
       profiles: dto.profiles ? { create: dto.profiles } : {},
+      password: await bcrypt.hash(dto.password, 10),
     };
-
-    return this.prisma.users.create({
-      data,
-      include: this._include,
-    });
+    const createdUser = await this.prisma.users.create({ data });
+    return {
+      ...createdUser,
+      password: undefined,
+    };
   }
 
   findAll() {

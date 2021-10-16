@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from './prisma/prisma.service';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Games Api';
+  constructor(private readonly prisma: PrismaService) {}
+  getHello() {
+    return this.prisma.games.findMany();
   }
 }

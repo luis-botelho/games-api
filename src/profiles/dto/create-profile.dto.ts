@@ -1,6 +1,7 @@
 import { Type } from 'class-transformer';
 import {
   IsArray,
+  IsInt,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -21,7 +22,7 @@ export class CreateProfileDto {
   @IsOptional()
   user: User;
 
-  // @ValidateNested({ each: true })
+  @IsInt({ each: true })
   @IsArray()
   @IsOptional()
   gamesIds?: number[];

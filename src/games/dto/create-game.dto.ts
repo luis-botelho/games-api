@@ -28,10 +28,10 @@ export class CreateGameDto {
   IMDB: number;
   @IsString({ message: 'The trailer link must to be a string' })
   @IsOptional()
-  trailer: string | null;
+  trailer: string;
   @IsString({ message: 'The game player must be a string' })
   @IsOptional({ message: 'The game player must not be empty' })
-  gameplay: string | null;
+  gameplay: string;
 
   @ValidateNested({ each: true })
   @Type(() => ConnectGenreDto)

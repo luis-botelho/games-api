@@ -8,7 +8,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { CreateProfileDto } from 'src/profiles/dto/create-profile.dto';
-import { User } from '../entities/user.entity';
+import { Cpf } from 'src/decorators/cpf.decorators';
 
 export class CreateUserDto {
   @IsString({ message: 'The name needs to be a string' })
@@ -27,8 +27,7 @@ export class CreateUserDto {
   @IsNotEmpty({ message: 'The password is empty' })
   password: string;
 
-  @IsString({ message: 'The Cpf needs to be a string' })
-  @IsNotEmpty({ message: 'The Cpf is empty' })
+  @Cpf()
   cpf: string;
 
   @ValidateNested({ each: true })
