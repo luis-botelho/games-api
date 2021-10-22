@@ -27,19 +27,24 @@ export class GamesController {
     return this.gamesService.findAll();
   }
 
+  // @Get()
+  // findByProfile(@Param('/favorites/:id') id: number) {
+  //   return this.gamesService.findByProfile(id);
+  // }
+
   @Public()
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.gamesService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.gamesService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGameDto: UpdateGameDto) {
-    return this.gamesService.update(+id, updateGameDto);
+  update(@Param('id') id: number, @Body() updateGameDto: UpdateGameDto) {
+    return this.gamesService.update(id, updateGameDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.gamesService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.gamesService.remove(id);
   }
 }

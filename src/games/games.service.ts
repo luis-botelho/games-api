@@ -26,7 +26,12 @@ export class GamesService {
   findAll() {
     return this.prisma.games.findMany({ include: this._include });
   }
-
+  // findByProfile(profile: string) {
+  //   return this.prisma.games.findMany({
+  //     where: { profile: profile },
+  //     include: this._include,
+  //   });
+  // }
   findOne(id: number) {
     return this.prisma.games.findFirst({
       where: { id },

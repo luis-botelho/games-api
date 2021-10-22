@@ -34,7 +34,7 @@ export class ProfilesService {
   findOne(id: number) {
     return this.prisma.profiles.findUnique({
       where: { id },
-      include: this._include,
+      include: { games: true },
     });
   }
 
