@@ -7,6 +7,7 @@ import { UpdateGameDto } from './dto/update-game.dto';
 @Injectable()
 export class GamesService {
   constructor(private readonly prisma: PrismaService) {}
+  private _include = { genres: true };
   create(dto: CreateGameDto) {
     const data: Prisma.GamesCreateInput = {
       ...dto,
@@ -23,11 +24,14 @@ export class GamesService {
   }
 
   findAll() {
-    return this.prisma.games.findMany();
+    return this.prisma.games.findMany({ include: this._include });
   }
 
   findOne(id: number) {
-    return this.prisma.games.findFirst({ where: { id } });
+    return this.prisma.games.findFirst({
+      where: { id },
+      include: this._include,
+    });
   }
 
   update(id: number, dto: UpdateGameDto) {

@@ -17,7 +17,7 @@ export class AuthService {
 
   async login(dto: LoginDto): Promise<UserToken> {
     const user: User = await this.validateUser(dto.email, dto.password);
-
+    const isAdmin: User = await this.usersService.findByEmail(user.email);
     const payload: UserPayload = {
       sub: user.id,
       username: user.email,
@@ -25,6 +25,7 @@ export class AuthService {
 
     return {
       accessToken: this.jwtService.sign(payload),
+      admin: isAdmin.admin,
     };
   }
 

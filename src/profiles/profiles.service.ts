@@ -24,8 +24,11 @@ export class ProfilesService {
     return this.prisma.profiles.create({ data, include: this._include });
   }
 
-  findAll() {
-    return this.prisma.profiles.findMany({ include: this._include });
+  findAll(id: number) {
+    return this.prisma.profiles.findMany({
+      where: { userId: id },
+      include: { games: true },
+    });
   }
 
   findOne(id: number) {

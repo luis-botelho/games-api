@@ -30,7 +30,10 @@ export class UsersService {
     return this.prisma.users.findMany();
   }
   findByEmail(email: string) {
-    return this.prisma.users.findUnique({ where: { email } });
+    return this.prisma.users.findUnique({
+      where: { email },
+      include: this._include,
+    });
   }
 
   async findOne(id: number) {
